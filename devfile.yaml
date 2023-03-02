@@ -14,7 +14,16 @@ projects:
       checkoutFrom:
         revision: main
 components:
-  - container:
+  - attributes:
+      che-code.eclipse.org/contribute-cpuLimit: true
+      che-code.eclipse.org/contribute-cpuRequest: true
+      che-code.eclipse.org/contribute-entry-point: true
+      che-code.eclipse.org/contribute-memoryLimit: true
+      che-code.eclipse.org/contribute-memoryRequest: true
+      che-code.eclipse.org/contribute-volume-mount/checode: /checode
+      che-code.eclipse.org/contributed-container: tools
+      che-code.eclipse.org/original-memoryLimit: 4G
+    container:
       command:
         - /checode/entrypoint-volume.sh
       cpuLimit: 500m
@@ -29,53 +38,6 @@ components:
           path: /hello/greeting/devspaces-user
           protocol: http
           targetPort: 8080
-        - attributes:
-            contributed-by: che-code.eclipse.org
-            cookiesAuthEnabled: true
-            discoverable: false
-            type: main
-            urlRewriteSupported: true
-          exposure: public
-          name: che-code
-          path: '?tkn=eclipse-che'
-          protocol: https
-          secure: false
-          targetPort: 3100
-        - attributes:
-            contributed-by: che-code.eclipse.org
-            discoverable: false
-            urlRewriteSupported: false
-          exposure: public
-          name: code-redirect-1
-          protocol: http
-          targetPort: 13131
-        - attributes:
-            contributed-by: che-code.eclipse.org
-            discoverable: false
-            urlRewriteSupported: false
-          exposure: public
-          name: code-redirect-2
-          protocol: http
-          targetPort: 13132
-        - attributes:
-            contributed-by: che-code.eclipse.org
-            discoverable: false
-            urlRewriteSupported: false
-          exposure: public
-          name: code-redirect-3
-          protocol: http
-          targetPort: 13133
-      env:
-        - name: QUARKUS_HTTP_HOST
-          value: 0.0.0.0
-        - name: CHE_DASHBOARD_URL
-          value: 'https://devspaces.apps.cluster-9v5bn.9v5bn.sandbox1725.opentlc.com'
-        - name: CHE_PLUGIN_REGISTRY_URL
-          value: 'https://devspaces.apps.cluster-9v5bn.9v5bn.sandbox1725.opentlc.com/plugin-registry/v3'
-        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-          value: 'http://plugin-registry.openshift-devspaces.svc:8080/v3'
-        - name: OPENVSX_REGISTRY_URL
-          value: 'https://open-vsx.org'
       image: 'registry.redhat.io/devspaces/udi-rhel8@sha256:8de469cc9131a42092bd66e0f27a52bbc9b9a449235abf5b900d172a1bd3c985'
       memoryLimit: 5.07G
       memoryRequest: 256Mi
