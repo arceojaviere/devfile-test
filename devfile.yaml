@@ -14,7 +14,7 @@ projects:
       checkoutFrom:
         revision: main
 components:
-    container:
+  - container:
       command:
         - /checode/entrypoint-volume.sh
       cpuLimit: 500m
